@@ -19,32 +19,33 @@ color = {
     'DEFAULT'         : '\033[0m',
     'TWITTER_BLUE'            : '\033[38;5;33m',
 }
-version = 'V2.2'
 incorrect = 'Wrong password! ' # You can change this to say whatever you like!
-exitSentence = color['RED'] + '[Now Exiting!] ' + color['DEFAULT'] +'Folder Locker ' + version + '\n'
+exitSentence = color['RED'] + '[Now Exiting!] ' + color['DEFAULT'] +'Folder Locker\n'
 exit = False
 idiot = 'You must be a idiot, you really think I would set that as my password? -_-\n' + exitSentence # You can change this to say whatever you like!
 noRun = 'You are not allowed to enter that command here!'
+credits = '©2017 Synthx\n' + color['TWITTER_BLUE'] + 'Twitter: @_Synthx' + color['DEFAULT'] + '\n@danbatiste\n@NyteLife26'
 os.system("clear") # This will clear the screen for a nice and clean interface!
 
 os.system('chflags hidden SeceretPasswordFile.txt') # make sure this file is in same directory that you are running this script from.
 passwordFile = open('SeceretPasswordFile.txt') # make sure this file is in same directory that you are running this script from.
 secretPassword = passwordFile.read()
 header = color['RED'] + '''
-  _____     _     _             _               _
- |  ___|__ | | __| | ___ _ __  | |    ___   ___| | _____ _ __
- | |_ / _ \| |/ _` |/ _ \ '__| | |   / _ \ / __| |/ / _ \ '__|
- |  _| (_) | | (_| |  __/ |    | |__| (_) | (__|   <  __/ |
- |_|  \___/|_|\__,_|\___|_|    |_____\___/ \___|_|\_\___|_|
+          _____     _     _             _               _
+         |  ___|__ | | __| | ___ _ __  | |    ___   ___| | _____ _ __
+         | |_ / _ \| |/ _` |/ _ \ '__| | |   / _ \ / __| |/ / _ \ '__|
+         |  _| (_) | | (_| |  __/ |    | |__| (_) | (__|   <  __/ |
+         |_|  \___/|_|\__,_|\___|_|    |_____\___/ \___|_|\_\___|_|
 
-''' + color['DEFAULT'] + '''\n                        -=-=-=-=-=-=-=-=-=-=-=-=-\n                          Folder Locker ''' + version + '''\n                          Created by ''' + color['TWITTER_BLUE'] + '''@_Synthx''' + color['DEFAULT'] + '''\n                        -=-=-=-=-=-=-=-=-=-=-=-=-
+''' + color['DEFAULT'] + '''                        +-----------------------+\n                        |  Created by ''' + color['TWITTER_BLUE'] + '''@_Synthx''' + color['DEFAULT'] + '''  |\n                        +-----------------------+
 ''' + color['DEFAULT']
-print(header)
-print('Type "help" to begin!\n')
+print(header + 'Type "help" to begin!\n')
 def Main():
 	global exit
-	maininput = input(">>> ") # You can change this to whatever you like! Dont forget the space after it.
-	if maininput.lower() == 'help':
+	maininput = input(color['TWITTER_BLUE'] + 'Folder Locker> ' + color['DEFAULT']) # You can change this to whatever you like! Dont forget the space after it.
+	if maininput == '':
+		Main()
+	elif maininput.lower() == 'help':
 		helpme()
 	elif maininput.lower() == 'unlock':
 		unlockst()
@@ -60,15 +61,18 @@ def Main():
 		Main()
 	elif maininput.lower() == 'info':
 		os.system('clear')
-		print('©2017 Synthx')
-	elif maininput == 'up':
-		print(noRun + 'This command is only valid when trying to unlock a folder')
+		print(credits)
+		Main()
+	elif maininput == 'cancel':
+		os.system('clear')
+		print(header + '\n' + color['RED'] + noRun + color['DEFAULT'] + '\nThis command is only valid when trying to unlock a folder!')
+		Main()
 	else:
-		print('[ERROR] COMMAND "' + maininput + '" NOT FOUND\nPLEASE USE A PROPER COMMAND!')
+		print(color['RED'] + '[ERROR] COMMAND "' + maininput + '" NOT FOUND\n' + color['DEFAULT'] + 'PLEASE USE A PROPER COMMAND!\n')
 def helpme():
 	global exit
 	os.system('clear')
-	print('''
+	print(color['YELLOW'] + '''
 +--------+-------------------------------------+
 | help   |  shows this dialog                  |
 +--------+-------------------------------------+
@@ -86,9 +90,8 @@ def helpme():
 	Main()
 def unlockst():
 	os.system('clear')
-	print(header)
-	print('What folder would you like to unlock? Please type a Directory!')
-	folderSelect = input("(e.x. ~/Desktop/FOLDER_NAME) >>> ")
+	print(header + 'What folder would you like to unlock? Please type a Directory!')
+	folderSelect = input(color['TWITTER_BLUE'] + "(e.x. ~/Desktop/FOLDER_NAME)> " + color['DEFAULT'])
 	if "help" in folderSelect.lower() or "unlock" in folderSelect.lower() or "lock" in folderSelect.lower() or "exit" in folderSelect.lower() or "clear" in folderSelect.lower() or "info" in folderSelect.lower():
 		unlockst()
 	else:
@@ -96,14 +99,10 @@ def unlockst():
 def unlockMain(folder_select):
 	global exit
 	os.system('clear')
-	print(header)
-	print('Please enter in password to unlock the folder!')
-	#unlockMain()
-	typedPassword = input(">>> ") # You can change this to whatever you like! Dont forget the space after it.
+	print(header + 'Please enter in password to unlock the folder!')
+	typedPassword = input(color['TWITTER_BLUE'] + "Folder Locker> " + color['DEFAULT']) # You can change this to whatever you like! Dont forget the space after it.
 	if typedPassword == secretPassword:
-		os.system("clear")
-		os.system("chflags nohidden " + folder_select)
-		os.system('clear')
+		os.system('clear;' + 'chflags nohidden ' + folder_select + ';clear')
 		print('Folder Unlocked!')
 		theExit()
 	elif typedPassword.lower() == 'password':
@@ -128,15 +127,16 @@ def unlockMain(folder_select):
 		exit = True
 	elif typedPassword.lower() == 'lock':
 		os.system('clear')
-		print('You cannot use this command as the folder is already locked :/')
+		print(color['RED'] + 'You cannot use this command as the folder is already locked :/' + color['DEFAULT'])
 	elif typedPassword.lower() == 'clear':
 		os.system('clear')
 	elif typedPassword.lower() == 'info':
 		os.system('clear')
-		print(noRun + '\nIf you would like to see credits, please type "up"!\nOtherwise, Please enter in password to unlock the folder!')
+		print(noRun + '\nIf you would like to see credits, please type "cancel"!\nOtherwise, Please enter in password to unlock the folder!')
 		unlockMain()
-	elif typedPassword.lower() == 'up':
+	elif typedPassword.lower() == 'cancel':
 		os.system('clear')
+		print(header)
 		Main()
 	else:
 		os.system("clear")
@@ -144,27 +144,22 @@ def unlockMain(folder_select):
 		exit = True
 def lockFolder():
 	os.system('clear')
-	print(header)
-	print('What folder would you like to lock? Please type a Directory!')
-	lockInput = input("(e.x. ~/Desktop/FOLDER_NAME) >>> ")
-	os.system('clear')
-	os.system('chflags hidden ' + lockInput)
-	os.system('clear')
+	print(header + 'What folder would you like to lock? Please type a Directory!')
+	lockInput = input(color['TWITTER_BLUE'] + "(e.x. ~/Desktop/FOLDER_NAME)> " + color['DEFAULT'])
+	os.system('clear;' + 'chflags hidden ' + lockInput + ';clear')
 	print('Folder Locked!')
 	theExit()
 def theExit():
 	global exit
-	print(header)
-	print('Would you like to exit Folder Locker? Yes/no or Y/n')
-	exitInput = input(">>> ")
+	print(header + 'Would you like to exit Folder Locker? Yes/no or Y/n')
+	exitInput = input(color['TWITTER_BLUE'] + "Folder Locker> " + color['DEFAULT'])
 	if "yes" in exitInput.lower() or "y" in exitInput.lower():
 		os.system('clear')
 		print(exitSentence)
 		exit = True
 	elif "no" in exitInput.lower() or "n" in exitInput.lower():
 		os.system('clear')
-		print(header)
-		print('Please type "help" to begin!')
+		print(header + 'Please type "help" to begin!')
 		Main()
 	elif exitInput.lower() == 'exit':
 		os.system('clear')
