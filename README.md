@@ -25,6 +25,12 @@ This is a main hub for all tools I have created/am working on!
 * Python3 and above
 * These programs mainly only work on Mac right now
 
+# Instructions
+1. First, git clone this repo onto your desktop. `git clone https://github.com/xSynthx/Easy-SSH`
+2. Open terminal, cd to the directory that xTools.py is. *should be in the folder called xTools*
+3. Run `python3 xTools.py`
+4. All done!
+
 # TO-DO
 * Add support for Windows
 * Add/make more tools
