@@ -30,5 +30,5 @@ This is a main hub for all tools I have created/am working on!
 * Add/make more tools
 
 # Credits
-1. @danbatiste
-2. @NyteLife26
+1. [ @danbatiste ](https://github.com/danbatiste)
+2. [ @NyteLife26 ](https://github.com/Nytelife26)
